@@ -1,0 +1,1344 @@
+{
+  "sequences": [
+    {
+      "athlete_id": "athlete-01",
+      "bout_id": "bout-000",
+      "discipline": "bjj_no_gi",
+      "states": [
+        "standing_clinch",
+        "open_guard",
+        "guard",
+        "mount",
+        "back_control",
+        "reset",
+        "guard",
+        "reset"
+      ]
+    },
+    {
+      "athlete_id": "athlete-02",
+      "bout_id": "bout-001",
+      "discipline": "bjj_no_gi",
+      "states": [
+        "standing_clinch",
+        "guard",
+        "open_guard",
+        "side_control",
+        "mount",
+        "reset",
+        "guard",
+        "reset",
+        "guard",
+        "reset"
+      ]
+    },
+    {
+      "athlete_id": "athlete-03",
+      "bout_id": "bout-002",
+      "discipline": "bjj_no_gi",
+      "states": [
+        "standing_clinch",
+        "guard",
+        "half_guard",
+        "side_control",
+        "mount",
+        "back_control",
+        "submission_lock",
+        "reset",
+        "guard",
+        "back_control",
+        "reset"
+      ]
+    },
+    {
+      "athlete_id": "athlete-04",
+      "bout_id": "bout-003",
+      "discipline": "bjj_no_gi",
+      "states": [
+        "standing_clinch",
+        "guard",
+        "half_guard",
+        "side_control",
+        "mount",
+        "back_control",
+        "submission_lock",
+        "back_control",
+        "reset"
+      ]
+    },
+    {
+      "athlete_id": "athlete-05",
+      "bout_id": "bout-004",
+      "discipline": "bjj_no_gi",
+      "states": [
+        "standing_clinch",
+        "standing_clinch",
+        "guard",
+        "open_guard",
+        "side_control",
+        "mount",
+        "reset",
+        "guard",
+        "submission_lock"
+      ]
+    },
+    {
+      "athlete_id": "athlete-06",
+      "bout_id": "bout-005",
+      "discipline": "bjj_no_gi",
+      "states": [
+        "standing_clinch",
+        "guard",
+        "open_guard",
+        "side_control",
+        "mount",
+        "reset",
+        "guard",
+        "reset"
+      ]
+    },
+    {
+      "athlete_id": "athlete-07",
+      "bout_id": "bout-006",
+      "discipline": "bjj_no_gi",
+      "states": [
+        "standing_clinch",
+        "guard",
+        "open_guard",
+        "side_control",
+        "mount",
+        "reset",
+        "guard",
+        "reset",
+        "guard",
+        "reset"
+      ]
+    },
+    {
+      "athlete_id": "athlete-08",
+      "bout_id": "bout-007",
+      "discipline": "bjj_no_gi",
+      "states": [
+        "standing_clinch",
+        "open_guard",
+        "guard",
+        "mount",
+        "back_control",
+        "reset",
+        "guard",
+        "reset"
+      ]
+    },
+    {
+      "athlete_id": "athlete-09",
+      "bout_id": "bout-008",
+      "discipline": "bjj_no_gi",
+      "states": [
+        "standing_clinch",
+        "guard",
+        "half_guard",
+        "side_control",
+        "mount",
+        "back_control",
+        "submission_lock",
+        "back_control",
+        "submission_lock"
+      ]
+    },
+    {
+      "athlete_id": "athlete-10",
+      "bout_id": "bout-009",
+      "discipline": "bjj_no_gi",
+      "states": [
+        "standing_clinch",
+        "guard",
+        "half_guard",
+        "side_control",
+        "mount",
+        "back_control",
+        "submission_lock",
+        "back_control",
+        "submission_lock"
+      ]
+    },
+    {
+      "athlete_id": "athlete-11",
+      "bout_id": "bout-010",
+      "discipline": "bjj_no_gi",
+      "states": [
+        "standing_clinch",
+        "standing_clinch",
+        "guard",
+        "half_guard",
+        "side_control",
+        "mount",
+        "back_control",
+        "submission_lock",
+        "submission_lock"
+      ]
+    },
+    {
+      "athlete_id": "athlete-12",
+      "bout_id": "bout-011",
+      "discipline": "bjj_no_gi",
+      "states": [
+        "standing_clinch",
+        "standing_clinch",
+        "guard",
+        "half_guard",
+        "side_control",
+        "mount",
+        "back_control",
+        "submission_lock",
+        "reset",
+        "guard",
+        "reset"
+      ]
+    },
+    {
+      "athlete_id": "athlete-01",
+      "bout_id": "bout-012",
+      "discipline": "bjj_no_gi",
+      "states": [
+        "standing_clinch",
+        "guard",
+        "open_guard",
+        "side_control",
+        "mount",
+        "reset",
+        "guard",
+        "back_control",
+        "submission_lock"
+      ]
+    },
+    {
+      "athlete_id": "athlete-02",
+      "bout_id": "bout-013",
+      "discipline": "bjj_no_gi",
+      "states": [
+        "standing_clinch",
+        "standing_clinch",
+        "open_guard",
+        "guard",
+        "mount",
+        "back_control",
+        "reset",
+        "guard",
+        "back_control",
+        "submission_lock"
+      ]
+    },
+    {
+      "athlete_id": "athlete-03",
+      "bout_id": "bout-014",
+      "discipline": "bjj_no_gi",
+      "states": [
+        "standing_clinch",
+        "standing_clinch",
+        "guard",
+        "half_guard",
+        "side_control",
+        "mount",
+        "back_control",
+        "submission_lock",
+        "reset",
+        "guard",
+        "reset"
+      ]
+    },
+    {
+      "athlete_id": "athlete-04",
+      "bout_id": "bout-015",
+      "discipline": "bjj_no_gi",
+      "states": [
+        "standing_clinch",
+        "guard",
+        "open_guard",
+        "side_control",
+        "mount",
+        "reset",
+        "guard",
+        "reset"
+      ]
+    },
+    {
+      "athlete_id": "athlete-05",
+      "bout_id": "bout-016",
+      "discipline": "bjj_no_gi",
+      "states": [
+        "standing_clinch",
+        "open_guard",
+        "guard",
+        "mount",
+        "back_control",
+        "reset",
+        "guard",
+        "reset",
+        "guard",
+        "back_control",
+        "submission_lock"
+      ]
+    },
+    {
+      "athlete_id": "athlete-06",
+      "bout_id": "bout-017",
+      "discipline": "bjj_no_gi",
+      "states": [
+        "standing_clinch",
+        "guard",
+        "half_guard",
+        "guard",
+        "side_control",
+        "back_control",
+        "submission_lock",
+        "back_control",
+        "submission_lock"
+      ]
+    },
+    {
+      "athlete_id": "athlete-07",
+      "bout_id": "bout-018",
+      "discipline": "bjj_no_gi",
+      "states": [
+        "standing_clinch",
+        "standing_clinch",
+        "guard",
+        "half_guard",
+        "side_control",
+        "mount",
+        "back_control",
+        "submission_lock",
+        "reset",
+        "guard",
+        "back_control",
+        "reset"
+      ]
+    },
+    {
+      "athlete_id": "athlete-08",
+      "bout_id": "bout-019",
+      "discipline": "bjj_no_gi",
+      "states": [
+        "standing_clinch",
+        "standing_clinch",
+        "guard",
+        "half_guard",
+        "guard",
+        "side_control",
+        "back_control",
+        "submission_lock",
+        "back_control",
+        "submission_lock"
+      ]
+    },
+    {
+      "athlete_id": "athlete-09",
+      "bout_id": "bout-020",
+      "discipline": "bjj_no_gi",
+      "states": [
+        "standing_clinch",
+        "standing_clinch",
+        "guard",
+        "open_guard",
+        "side_control",
+        "mount",
+        "reset",
+        "guard",
+        "reset",
+        "guard",
+        "back_control",
+        "reset"
+      ]
+    },
+    {
+      "athlete_id": "athlete-10",
+      "bout_id": "bout-021",
+      "discipline": "bjj_no_gi",
+      "states": [
+        "standing_clinch",
+        "open_guard",
+        "guard",
+        "mount",
+        "back_control",
+        "reset",
+        "guard",
+        "back_control",
+        "reset"
+      ]
+    },
+    {
+      "athlete_id": "athlete-11",
+      "bout_id": "bout-022",
+      "discipline": "bjj_no_gi",
+      "states": [
+        "standing_clinch",
+        "standing_clinch",
+        "guard",
+        "half_guard",
+        "guard",
+        "side_control",
+        "back_control",
+        "submission_lock",
+        "submission_lock"
+      ]
+    },
+    {
+      "athlete_id": "athlete-12",
+      "bout_id": "bout-023",
+      "discipline": "bjj_no_gi",
+      "states": [
+        "standing_clinch",
+        "standing_clinch",
+        "guard",
+        "open_guard",
+        "side_control",
+        "mount",
+        "reset",
+        "guard",
+        "back_control",
+        "reset"
+      ]
+    },
+    {
+      "athlete_id": "athlete-01",
+      "bout_id": "bout-024",
+      "discipline": "bjj_no_gi",
+      "states": [
+        "standing_clinch",
+        "standing_clinch",
+        "guard",
+        "half_guard",
+        "side_control",
+        "mount",
+        "back_control",
+        "submission_lock",
+        "reset",
+        "guard",
+        "back_control",
+        "reset"
+      ]
+    },
+    {
+      "athlete_id": "athlete-02",
+      "bout_id": "bout-025",
+      "discipline": "bjj_no_gi",
+      "states": [
+        "standing_clinch",
+        "open_guard",
+        "guard",
+        "mount",
+        "back_control",
+        "reset",
+        "guard",
+        "reset",
+        "guard",
+        "reset"
+      ]
+    },
+    {
+      "athlete_id": "athlete-03",
+      "bout_id": "bout-026",
+      "discipline": "bjj_no_gi",
+      "states": [
+        "standing_clinch",
+        "guard",
+        "open_guard",
+        "side_control",
+        "mount",
+        "reset",
+        "guard",
+        "submission_lock"
+      ]
+    },
+    {
+      "athlete_id": "athlete-04",
+      "bout_id": "bout-027",
+      "discipline": "bjj_no_gi",
+      "states": [
+        "standing_clinch",
+        "standing_clinch",
+        "guard",
+        "half_guard",
+        "side_control",
+        "mount",
+        "back_control",
+        "submission_lock",
+        "reset",
+        "guard",
+        "submission_lock"
+      ]
+    },
+    {
+      "athlete_id": "athlete-05",
+      "bout_id": "bout-028",
+      "discipline": "bjj_no_gi",
+      "states": [
+        "standing_clinch",
+        "guard",
+        "half_guard",
+        "guard",
+        "side_control",
+        "back_control",
+        "submission_lock",
+        "reset",
+        "guard",
+        "back_control",
+        "submission_lock"
+      ]
+    },
+    {
+      "athlete_id": "athlete-06",
+      "bout_id": "bout-029",
+      "discipline": "bjj_no_gi",
+      "states": [
+        "standing_clinch",
+        "guard",
+        "open_guard",
+        "side_control",
+        "mount",
+        "reset",
+        "guard",
+        "reset",
+        "guard",
+        "back_control",
+        "reset"
+      ]
+    },
+    {
+      "athlete_id": "athlete-07",
+      "bout_id": "bout-030",
+      "discipline": "bjj_no_gi",
+      "states": [
+        "standing_clinch",
+        "guard",
+        "open_guard",
+        "side_control",
+        "mount",
+        "reset",
+        "guard",
+        "reset"
+      ]
+    },
+    {
+      "athlete_id": "athlete-08",
+      "bout_id": "bout-031",
+      "discipline": "bjj_no_gi",
+      "states": [
+        "standing_clinch",
+        "guard",
+        "half_guard",
+        "guard",
+        "side_control",
+        "back_control",
+        "submission_lock",
+        "back_control",
+        "reset"
+      ]
+    },
+    {
+      "athlete_id": "athlete-09",
+      "bout_id": "bout-032",
+      "discipline": "bjj_no_gi",
+      "states": [
+        "standing_clinch",
+        "guard",
+        "half_guard",
+        "guard",
+        "side_control",
+        "back_control",
+        "submission_lock",
+        "reset",
+        "guard",
+        "submission_lock"
+      ]
+    },
+    {
+      "athlete_id": "athlete-10",
+      "bout_id": "bout-033",
+      "discipline": "bjj_no_gi",
+      "states": [
+        "standing_clinch",
+        "guard",
+        "half_guard",
+        "side_control",
+        "mount",
+        "back_control",
+        "submission_lock"
+      ]
+    },
+    {
+      "athlete_id": "athlete-11",
+      "bout_id": "bout-034",
+      "discipline": "bjj_no_gi",
+      "states": [
+        "standing_clinch",
+        "guard",
+        "half_guard",
+        "guard",
+        "side_control",
+        "back_control",
+        "submission_lock",
+        "reset",
+        "guard",
+        "reset"
+      ]
+    },
+    {
+      "athlete_id": "athlete-12",
+      "bout_id": "bout-035",
+      "discipline": "bjj_no_gi",
+      "states": [
+        "standing_clinch",
+        "standing_clinch",
+        "open_guard",
+        "guard",
+        "mount",
+        "back_control",
+        "reset",
+        "guard",
+        "back_control",
+        "reset"
+      ]
+    },
+    {
+      "athlete_id": "athlete-01",
+      "bout_id": "bout-036",
+      "discipline": "bjj_no_gi",
+      "states": [
+        "standing_clinch",
+        "standing_clinch",
+        "open_guard",
+        "guard",
+        "mount",
+        "back_control",
+        "reset",
+        "guard",
+        "reset",
+        "guard",
+        "back_control",
+        "submission_lock"
+      ]
+    },
+    {
+      "athlete_id": "athlete-02",
+      "bout_id": "bout-037",
+      "discipline": "bjj_no_gi",
+      "states": [
+        "standing_clinch",
+        "guard",
+        "half_guard",
+        "side_control",
+        "mount",
+        "back_control",
+        "submission_lock"
+      ]
+    },
+    {
+      "athlete_id": "athlete-03",
+      "bout_id": "bout-038",
+      "discipline": "bjj_no_gi",
+      "states": [
+        "standing_clinch",
+        "open_guard",
+        "guard",
+        "mount",
+        "back_control",
+        "reset",
+        "guard",
+        "reset",
+        "guard",
+        "submission_lock"
+      ]
+    },
+    {
+      "athlete_id": "athlete-04",
+      "bout_id": "bout-039",
+      "discipline": "bjj_no_gi",
+      "states": [
+        "standing_clinch",
+        "guard",
+        "half_guard",
+        "side_control",
+        "mount",
+        "back_control",
+        "submission_lock",
+        "reset",
+        "guard",
+        "back_control",
+        "submission_lock"
+      ]
+    },
+    {
+      "athlete_id": "athlete-05",
+      "bout_id": "bout-040",
+      "discipline": "bjj_no_gi",
+      "states": [
+        "standing_clinch",
+        "guard",
+        "half_guard",
+        "side_control",
+        "mount",
+        "back_control",
+        "submission_lock",
+        "reset",
+        "guard",
+        "reset"
+      ]
+    },
+    {
+      "athlete_id": "athlete-06",
+      "bout_id": "bout-041",
+      "discipline": "bjj_no_gi",
+      "states": [
+        "standing_clinch",
+        "guard",
+        "half_guard",
+        "side_control",
+        "mount",
+        "back_control",
+        "submission_lock",
+        "reset",
+        "guard",
+        "back_control",
+        "reset"
+      ]
+    },
+    {
+      "athlete_id": "athlete-07",
+      "bout_id": "bout-042",
+      "discipline": "bjj_no_gi",
+      "states": [
+        "standing_clinch",
+        "guard",
+        "half_guard",
+        "guard",
+        "side_control",
+        "back_control",
+        "submission_lock"
+      ]
+    },
+    {
+      "athlete_id": "athlete-08",
+      "bout_id": "bout-043",
+      "discipline": "bjj_no_gi",
+      "states": [
+        "standing_clinch",
+        "guard",
+        "half_guard",
+        "guard",
+        "side_control",
+        "back_control",
+        "submission_lock",
+        "reset",
+        "guard",
+        "reset"
+      ]
+    },
+    {
+      "athlete_id": "athlete-09",
+      "bout_id": "bout-044",
+      "discipline": "bjj_no_gi",
+      "states": [
+        "standing_clinch",
+        "standing_clinch",
+        "guard",
+        "open_guard",
+        "side_control",
+        "mount",
+        "reset",
+        "guard",
+        "reset",
+        "guard",
+        "reset"
+      ]
+    },
+    {
+      "athlete_id": "athlete-10",
+      "bout_id": "bout-045",
+      "discipline": "bjj_no_gi",
+      "states": [
+        "standing_clinch",
+        "standing_clinch",
+        "open_guard",
+        "guard",
+        "mount",
+        "back_control",
+        "reset",
+        "guard",
+        "reset",
+        "guard",
+        "submission_lock"
+      ]
+    },
+    {
+      "athlete_id": "athlete-11",
+      "bout_id": "bout-046",
+      "discipline": "bjj_no_gi",
+      "states": [
+        "standing_clinch",
+        "guard",
+        "half_guard",
+        "guard",
+        "side_control",
+        "back_control",
+        "submission_lock",
+        "back_control",
+        "reset"
+      ]
+    },
+    {
+      "athlete_id": "athlete-12",
+      "bout_id": "bout-047",
+      "discipline": "bjj_no_gi",
+      "states": [
+        "standing_clinch",
+        "open_guard",
+        "guard",
+        "mount",
+        "back_control",
+        "reset",
+        "guard",
+        "reset",
+        "guard",
+        "reset"
+      ]
+    },
+    {
+      "athlete_id": "athlete-01",
+      "bout_id": "bout-048",
+      "discipline": "bjj_no_gi",
+      "states": [
+        "standing_clinch",
+        "open_guard",
+        "guard",
+        "mount",
+        "back_control",
+        "reset",
+        "guard",
+        "reset",
+        "guard",
+        "submission_lock"
+      ]
+    },
+    {
+      "athlete_id": "athlete-02",
+      "bout_id": "bout-049",
+      "discipline": "bjj_no_gi",
+      "states": [
+        "standing_clinch",
+        "standing_clinch",
+        "guard",
+        "half_guard",
+        "guard",
+        "side_control",
+        "back_control",
+        "submission_lock",
+        "back_control",
+        "reset"
+      ]
+    },
+    {
+      "athlete_id": "athlete-03",
+      "bout_id": "bout-050",
+      "discipline": "bjj_no_gi",
+      "states": [
+        "standing_clinch",
+        "guard",
+        "open_guard",
+        "side_control",
+        "mount",
+        "reset",
+        "guard",
+        "reset",
+        "guard",
+        "back_control",
+        "reset"
+      ]
+    },
+    {
+      "athlete_id": "athlete-04",
+      "bout_id": "bout-051",
+      "discipline": "bjj_no_gi",
+      "states": [
+        "standing_clinch",
+        "standing_clinch",
+        "guard",
+        "open_guard",
+        "side_control",
+        "mount",
+        "reset",
+        "guard",
+        "submission_lock"
+      ]
+    },
+    {
+      "athlete_id": "athlete-05",
+      "bout_id": "bout-052",
+      "discipline": "bjj_no_gi",
+      "states": [
+        "standing_clinch",
+        "guard",
+        "half_guard",
+        "guard",
+        "side_control",
+        "back_control",
+        "submission_lock",
+        "submission_lock"
+      ]
+    },
+    {
+      "athlete_id": "athlete-06",
+      "bout_id": "bout-053",
+      "discipline": "bjj_no_gi",
+      "states": [
+        "standing_clinch",
+        "standing_clinch",
+        "guard",
+        "open_guard",
+        "side_control",
+        "mount",
+        "reset",
+        "guard",
+        "reset"
+      ]
+    },
+    {
+      "athlete_id": "athlete-07",
+      "bout_id": "bout-054",
+      "discipline": "bjj_no_gi",
+      "states": [
+        "standing_clinch",
+        "guard",
+        "open_guard",
+        "side_control",
+        "mount",
+        "reset",
+        "guard",
+        "reset",
+        "guard",
+        "back_control",
+        "reset"
+      ]
+    },
+    {
+      "athlete_id": "athlete-08",
+      "bout_id": "bout-055",
+      "discipline": "bjj_no_gi",
+      "states": [
+        "standing_clinch",
+        "standing_clinch",
+        "guard",
+        "open_guard",
+        "side_control",
+        "mount",
+        "reset",
+        "guard",
+        "reset",
+        "guard",
+        "reset"
+      ]
+    },
+    {
+      "athlete_id": "athlete-09",
+      "bout_id": "bout-056",
+      "discipline": "bjj_no_gi",
+      "states": [
+        "standing_clinch",
+        "open_guard",
+        "guard",
+        "mount",
+        "back_control",
+        "reset",
+        "guard",
+        "reset",
+        "guard",
+        "reset"
+      ]
+    },
+    {
+      "athlete_id": "athlete-10",
+      "bout_id": "bout-057",
+      "discipline": "bjj_no_gi",
+      "states": [
+        "standing_clinch",
+        "open_guard",
+        "guard",
+        "mount",
+        "back_control",
+        "reset",
+        "guard",
+        "reset"
+      ]
+    },
+    {
+      "athlete_id": "athlete-11",
+      "bout_id": "bout-058",
+      "discipline": "bjj_no_gi",
+      "states": [
+        "standing_clinch",
+        "guard",
+        "half_guard",
+        "guard",
+        "side_control",
+        "back_control",
+        "submission_lock",
+        "reset",
+        "guard",
+        "submission_lock"
+      ]
+    },
+    {
+      "athlete_id": "athlete-12",
+      "bout_id": "bout-059",
+      "discipline": "bjj_no_gi",
+      "states": [
+        "standing_clinch",
+        "guard",
+        "half_guard",
+        "side_control",
+        "mount",
+        "back_control",
+        "submission_lock",
+        "reset",
+        "guard",
+        "reset"
+      ]
+    },
+    {
+      "athlete_id": "athlete-01",
+      "bout_id": "bout-060",
+      "discipline": "bjj_no_gi",
+      "states": [
+        "standing_clinch",
+        "guard",
+        "half_guard",
+        "guard",
+        "side_control",
+        "back_control",
+        "submission_lock",
+        "reset",
+        "guard",
+        "submission_lock"
+      ]
+    },
+    {
+      "athlete_id": "athlete-02",
+      "bout_id": "bout-061",
+      "discipline": "bjj_no_gi",
+      "states": [
+        "standing_clinch",
+        "guard",
+        "half_guard",
+        "side_control",
+        "mount",
+        "back_control",
+        "submission_lock",
+        "reset",
+        "guard",
+        "reset"
+      ]
+    },
+    {
+      "athlete_id": "athlete-03",
+      "bout_id": "bout-062",
+      "discipline": "bjj_no_gi",
+      "states": [
+        "standing_clinch",
+        "standing_clinch",
+        "guard",
+        "half_guard",
+        "side_control",
+        "mount",
+        "back_control",
+        "submission_lock",
+        "reset",
+        "guard",
+        "reset"
+      ]
+    },
+    {
+      "athlete_id": "athlete-04",
+      "bout_id": "bout-063",
+      "discipline": "bjj_no_gi",
+      "states": [
+        "standing_clinch",
+        "guard",
+        "half_guard",
+        "guard",
+        "side_control",
+        "back_control",
+        "submission_lock"
+      ]
+    },
+    {
+      "athlete_id": "athlete-05",
+      "bout_id": "bout-064",
+      "discipline": "bjj_no_gi",
+      "states": [
+        "standing_clinch",
+        "standing_clinch",
+        "open_guard",
+        "guard",
+        "mount",
+        "back_control",
+        "reset",
+        "guard",
+        "reset"
+      ]
+    },
+    {
+      "athlete_id": "athlete-06",
+      "bout_id": "bout-065",
+      "discipline": "bjj_no_gi",
+      "states": [
+        "standing_clinch",
+        "guard",
+        "open_guard",
+        "side_control",
+        "mount",
+        "reset",
+        "guard",
+        "reset",
+        "guard",
+        "reset"
+      ]
+    },
+    {
+      "athlete_id": "athlete-07",
+      "bout_id": "bout-066",
+      "discipline": "bjj_no_gi",
+      "states": [
+        "standing_clinch",
+        "guard",
+        "open_guard",
+        "side_control",
+        "mount",
+        "reset",
+        "guard",
+        "reset",
+        "guard",
+        "reset"
+      ]
+    },
+    {
+      "athlete_id": "athlete-08",
+      "bout_id": "bout-067",
+      "discipline": "bjj_no_gi",
+      "states": [
+        "standing_clinch",
+        "open_guard",
+        "guard",
+        "mount",
+        "back_control",
+        "reset",
+        "guard",
+        "reset"
+      ]
+    },
+    {
+      "athlete_id": "athlete-09",
+      "bout_id": "bout-068",
+      "discipline": "bjj_no_gi",
+      "states": [
+        "standing_clinch",
+        "standing_clinch",
+        "guard",
+        "open_guard",
+        "side_control",
+        "mount",
+        "reset",
+        "guard",
+        "reset"
+      ]
+    },
+    {
+      "athlete_id": "athlete-10",
+      "bout_id": "bout-069",
+      "discipline": "bjj_no_gi",
+      "states": [
+        "standing_clinch",
+        "guard",
+        "half_guard",
+        "side_control",
+        "mount",
+        "back_control",
+        "submission_lock",
+        "reset",
+        "guard",
+        "submission_lock"
+      ]
+    },
+    {
+      "athlete_id": "athlete-11",
+      "bout_id": "bout-070",
+      "discipline": "bjj_no_gi",
+      "states": [
+        "standing_clinch",
+        "standing_clinch",
+        "open_guard",
+        "guard",
+        "mount",
+        "back_control",
+        "reset",
+        "guard",
+        "reset",
+        "guard",
+        "submission_lock"
+      ]
+    },
+    {
+      "athlete_id": "athlete-12",
+      "bout_id": "bout-071",
+      "discipline": "bjj_no_gi",
+      "states": [
+        "standing_clinch",
+        "guard",
+        "open_guard",
+        "side_control",
+        "mount",
+        "reset",
+        "guard",
+        "reset",
+        "guard",
+        "reset"
+      ]
+    },
+    {
+      "athlete_id": "athlete-01",
+      "bout_id": "bout-072",
+      "discipline": "bjj_no_gi",
+      "states": [
+        "standing_clinch",
+        "open_guard",
+        "guard",
+        "mount",
+        "back_control",
+        "reset",
+        "guard",
+        "reset",
+        "guard",
+        "submission_lock"
+      ]
+    },
+    {
+      "athlete_id": "athlete-02",
+      "bout_id": "bout-073",
+      "discipline": "bjj_no_gi",
+      "states": [
+        "standing_clinch",
+        "standing_clinch",
+        "open_guard",
+        "guard",
+        "mount",
+        "back_control",
+        "reset",
+        "guard",
+        "reset",
+        "guard",
+        "back_control",
+        "reset"
+      ]
+    },
+    {
+      "athlete_id": "athlete-03",
+      "bout_id": "bout-074",
+      "discipline": "bjj_no_gi",
+      "states": [
+        "standing_clinch",
+        "standing_clinch",
+        "guard",
+        "half_guard",
+        "guard",
+        "side_control",
+        "back_control",
+        "submission_lock",
+        "reset",
+        "guard",
+        "submission_lock"
+      ]
+    },
+    {
+      "athlete_id": "athlete-04",
+      "bout_id": "bout-075",
+      "discipline": "bjj_no_gi",
+      "states": [
+        "standing_clinch",
+        "standing_clinch",
+        "guard",
+        "open_guard",
+        "side_control",
+        "mount",
+        "reset",
+        "guard",
+        "reset",
+        "guard",
+        "back_control",
+        "reset"
+      ]
+    },
+    {
+      "athlete_id": "athlete-05",
+      "bout_id": "bout-076",
+      "discipline": "bjj_no_gi",
+      "states": [
+        "standing_clinch",
+        "open_guard",
+        "guard",
+        "mount",
+        "back_control",
+        "reset",
+        "guard",
+        "reset",
+        "guard",
+        "submission_lock"
+      ]
+    },
+    {
+      "athlete_id": "athlete-06",
+      "bout_id": "bout-077",
+      "discipline": "bjj_no_gi",
+      "states": [
+        "standing_clinch",
+        "standing_clinch",
+        "guard",
+        "half_guard",
+        "guard",
+        "side_control",
+        "back_control",
+        "submission_lock"
+      ]
+    },
+    {
+      "athlete_id": "athlete-07",
+      "bout_id": "bout-078",
+      "discipline": "bjj_no_gi",
+      "states": [
+        "standing_clinch",
+        "open_guard",
+        "guard",
+        "mount",
+        "back_control",
+        "reset",
+        "guard",
+        "reset"
+      ]
+    },
+    {
+      "athlete_id": "athlete-08",
+      "bout_id": "bout-079",
+      "discipline": "bjj_no_gi",
+      "states": [
+        "standing_clinch",
+        "guard",
+        "open_guard",
+        "side_control",
+        "mount",
+        "reset",
+        "guard",
+        "reset",
+        "guard",
+        "reset"
+      ]
+    }
+  ]
+}

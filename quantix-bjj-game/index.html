@@ -1,0 +1,705 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#07131d">
+  <title>QUANTIX BJJ: Roll &amp; Submit</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #07131d;
+      --panel: rgba(11, 25, 36, .94);
+      --line: rgba(135, 205, 220, .22);
+      --text: #edf7fb;
+      --muted: #9ab2c1;
+      --cyan: #7ce7df;
+      --gold: #f5d574;
+      --red: #ff7185;
+      --green: #91f0a1;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      padding: 18px;
+      color: var(--text);
+      background: radial-gradient(ellipse at 50% 0, #193347 0, var(--bg) 62%);
+      font: 15px/1.45 Inter, "Segoe UI", sans-serif;
+    }
+    button, select { font: inherit; }
+    .shell { max-width: 1160px; margin: auto; }
+    header { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-bottom: 14px; }
+    h1 { margin: 0; font-size: clamp(1.3rem, 3vw, 2rem); letter-spacing: .04em; }
+    h1 span { color: var(--cyan); }
+    .subtitle { color: var(--muted); font-size: .88rem; }
+    .top-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+    select, button {
+      color: var(--text); background: #102535; border: 1px solid var(--line);
+      border-radius: 9px; padding: 9px 12px;
+    }
+    button { cursor: pointer; transition: border-color .15s, transform .15s, background .15s; }
+    button:hover { border-color: var(--cyan); background: #17364a; }
+    button:active { transform: translateY(1px); }
+    .game-panel { padding: 12px; border: 1px solid var(--line); border-radius: 16px; background: var(--panel); box-shadow: 0 22px 70px #0007; }
+    .hud { display: grid; grid-template-columns: 1fr auto 1fr; gap: 14px; align-items: center; margin: 0 0 10px; }
+    .fighter-hud { min-width: 0; }
+    .fighter-hud.right { text-align: right; }
+    .fighter-name { display: flex; justify-content: space-between; gap: 8px; margin-bottom: 5px; font-size: .83rem; font-weight: 700; }
+    .right .fighter-name { flex-direction: row-reverse; }
+    .bar { height: 10px; margin: 4px 0; overflow: hidden; border-radius: 99px; background: #263846; }
+    .bar > i { display: block; width: 100%; height: 100%; transition: width .2s ease; background: linear-gradient(90deg, #40c9b0, var(--green)); }
+    .bar.posture > i { background: linear-gradient(90deg, #f3bb5c, #ffed9a); }
+    .bar.submission > i { background: linear-gradient(90deg, #ff7daa, #ff3f63); }
+    .right .bar > i { margin-left: auto; background: linear-gradient(90deg, #ff7daa, #ff3f63); }
+    .right .bar.posture > i { background: linear-gradient(90deg, #ffed9a, #f3bb5c); }
+    .right .bar.submission > i { background: linear-gradient(90deg, #40c9b0, var(--green)); }
+    .bar-label { color: var(--muted); font-size: .67rem; text-transform: uppercase; letter-spacing: .08em; }
+    .clock { min-width: 94px; text-align: center; font-size: 1.3rem; font-variant-numeric: tabular-nums; color: var(--gold); }
+    .arena { position: relative; overflow: hidden; border-radius: 10px; border: 1px solid #477080; background: #08151e; }
+    canvas { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; }
+    .overlay {
+      position: absolute; inset: 0; display: grid; place-items: center; padding: 18px;
+      background: rgba(4, 12, 19, .78); text-align: center; backdrop-filter: blur(5px);
+    }
+    .overlay[hidden] { display: none; }
+    .overlay-card { max-width: 480px; padding: 22px; border: 1px solid var(--line); border-radius: 16px; background: rgba(9, 23, 34, .94); }
+    .overlay-card h2 { margin: 0 0 8px; color: var(--cyan); }
+    .overlay-card p { color: var(--muted); }
+    .overlay-card .start { margin-top: 12px; min-width: 150px; color: #06141b; background: var(--cyan); font-weight: 800; }
+    .telemetry { display: grid; grid-template-columns: minmax(0, 1fr) minmax(240px, .75fr); gap: 12px; margin-top: 12px; }
+    .box { padding: 12px; border: 1px solid var(--line); border-radius: 11px; background: rgba(255,255,255,.025); }
+    .box h2 { margin: 0 0 8px; font-size: .77rem; color: var(--cyan); letter-spacing: .11em; text-transform: uppercase; }
+    .status { min-height: 24px; color: var(--gold); font-weight: 700; }
+    .status-line { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
+    .pressure-badge { flex: 0 0 auto; padding: 3px 7px; border: 1px solid rgba(255,113,133,.5); border-radius: 999px; color: #ff9aa8; font-size: .65rem; font-weight: 800; letter-spacing: .06em; }
+    .pressure-badge[hidden] { display: none; }
+    .timing { height: 15px; position: relative; margin: 8px 0; border-radius: 99px; background: linear-gradient(90deg, #e75265 0 30%, #eac75c 30% 43%, #65d982 43% 57%, #eac75c 57% 70%, #e75265 70%); }
+    .needle { position: absolute; top: -4px; left: 0; height: 23px; width: 4px; background: white; box-shadow: 0 0 9px white; }
+    .meter-caption, .help { color: var(--muted); font-size: .8rem; }
+    .matrix { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; margin-top: 8px; }
+    .matrix span { padding: 6px 3px; border-radius: 5px; background: #142a39; color: #cfe3eb; text-align: center; font-size: .68rem; }
+    .matrix span.active { outline: 1px solid var(--cyan); color: var(--cyan); }
+    .controls { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 11px; }
+    .controls button { flex: 1 1 120px; min-height: 42px; }
+    .controls .action { color: #06141b; background: var(--cyan); font-weight: 800; }
+    .log { display: grid; gap: 3px; max-height: 96px; overflow: auto; color: var(--muted); font-size: .75rem; }
+    .log div:first-child { color: var(--text); }
+    .key { padding: 1px 5px; border: 1px solid #557080; border-radius: 4px; color: var(--text); }
+    @media (max-width: 680px) {
+      body { padding: 10px; }
+      header { align-items: flex-start; flex-direction: column; }
+      .hud { grid-template-columns: 1fr auto 1fr; gap: 7px; }
+      .telemetry { grid-template-columns: 1fr; }
+      .game-panel { padding: 8px; }
+      .clock { min-width: 66px; font-size: 1.1rem; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header>
+      <div>
+        <h1><span>QUANTIX BJJ</span>: Roll &amp; Submit</h1>
+        <div class="subtitle">Tactical grappling · arcade reflex · Coach Simba approved 🐾</div>
+      </div>
+      <div class="top-controls">
+        <label class="subtitle" for="gi">Your gi</label>
+        <select id="gi" aria-label="Choose gi color">
+          <option value="#f0eee3">White</option><option value="#477de0">Retro Blue</option><option value="#222831">Black</option>
+        </select>
+        <label class="subtitle" for="tier">AI</label>
+        <select id="tier" aria-label="Choose opponent difficulty">
+          <option value="0">Spawner White Belt</option><option value="1" selected>Tactical Purple Belt</option><option value="2">Grandmaster Black Belt</option>
+        </select>
+        <button id="sound" type="button" aria-pressed="true">🔊 Sound</button>
+      </div>
+    </header>
+
+    <section class="game-panel" aria-label="BJJ arcade game">
+      <div class="hud">
+        <div class="fighter-hud">
+          <div class="fighter-name"><span>YOU · <span id="playerPoints">0</span> pts</span><span id="playerState">Standing</span></div>
+          <div class="bar-label">Stamina</div><div class="bar"><i id="playerStamina"></i></div>
+          <div class="bar-label">Posture</div><div class="bar posture"><i id="playerPosture"></i></div>
+          <div class="bar-label">Submission threat</div><div class="bar submission"><i id="playerThreat"></i></div>
+        </div>
+        <div class="clock" id="clock">05:00</div>
+        <div class="fighter-hud right">
+          <div class="fighter-name"><span>AI · <span id="aiPoints">0</span> pts</span><span id="aiState">Standing</span></div>
+          <div class="bar-label">Stamina</div><div class="bar"><i id="aiStamina"></i></div>
+          <div class="bar-label">Posture</div><div class="bar posture"><i id="aiPosture"></i></div>
+          <div class="bar-label">Submission threat</div><div class="bar submission"><i id="aiThreat"></i></div>
+        </div>
+      </div>
+
+      <div class="arena">
+        <canvas id="canvas" width="960" height="540" aria-label="Procedurally rendered grappling match"></canvas>
+        <div class="overlay" id="overlay">
+          <div class="overlay-card">
+            <h2 id="overlayTitle">Ready to roll?</h2>
+            <p id="overlayCopy">Advance position with W, defend with S, balance with A/D, time your submission with SPACE, and recover with E. A missed submission costs an extra 10 stamina and 8 posture. Flow Breath restores extra stamina when the AI has Side Control or Mount.</p>
+            <button class="start" id="start" type="button">Start match</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="telemetry">
+        <div class="box">
+          <h2>Roll telemetry</h2>
+          <div class="status-line">
+            <div class="status" id="status" role="status" aria-live="polite">Choose your gi and start the match.</div>
+            <span class="pressure-badge" id="pressureBadge" hidden>UNDER PRESSURE</span>
+          </div>
+          <div class="timing" aria-label="Timing gauge: green is perfect, yellow is a scramble, red is a reversal"><i class="needle" id="needle"></i></div>
+          <div class="meter-caption" id="meterCaption">Wait for a transition or submission attempt to activate the timing gauge.</div>
+          <div class="controls">
+            <button data-action="balance" type="button">A / D · Balance</button>
+            <button data-action="advance" type="button">W · Advance</button>
+            <button data-action="defend" type="button">S · Defend / Sweep</button>
+            <button class="action" data-action="timing" type="button">SPACE · Time / Submit</button>
+            <button data-action="breath" type="button">E · Flow breath</button>
+          </div>
+        </div>
+        <div class="box">
+          <h2>AI transition probability matrix</h2>
+          <div class="matrix" id="matrix"></div>
+          <h2 style="margin-top:12px">Roll log</h2>
+          <div class="log" id="log" aria-live="polite"></div>
+          <div class="help">Keyboard: <span class="key">A</span>/<span class="key">D</span> balance · <span class="key">W</span> advance · <span class="key">S</span> defend · <span class="key">SPACE</span> time · <span class="key">E</span> breathe</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    (() => {
+      "use strict";
+      const $ = (id) => document.getElementById(id);
+      const canvas = $("canvas");
+      const ctx = canvas.getContext("2d");
+      const positions = ["Standing", "Closed Guard", "Open Guard", "Half Guard", "Side Control", "Mount", "Back Control"];
+      const positionPoints = { "Standing": 0, "Closed Guard": 0, "Open Guard": 0, "Half Guard": 0, "Side Control": 3, "Mount": 4, "Back Control": 4 };
+      const tiers = [
+        { name: "Spawner White Belt", response: 6.8, attack: .18, stamina: .84 },
+        { name: "Tactical Purple Belt", response: 4.5, attack: .34, stamina: 1 },
+        { name: "Grandmaster Black Belt", response: 2.8, attack: .52, stamina: 1.12 }
+      ];
+      const game = {
+        running: false, over: false, time: 300, elapsed: 0, last: 0, aiTimer: 0,
+        playerPosition: 0, aiPosition: 0, playerStamina: 100, aiStamina: 100,
+        playerPosture: 100, aiPosture: 100, playerThreat: 0, aiThreat: 0,
+        playerPoints: 0, aiPoints: 0, challenge: null, needle: 0, direction: 1,
+        balance: 0, gi: "#f0eee3", effects: [], logs: [], shake: 0, flash: 0,
+        matrixChoice: 0, lastBreath: -20
+      };
+      let audioContext = null;
+      let soundEnabled = true;
+      let renderedMatrixChoice = -1;
+      const rand = (min, max) => min + Math.random() * (max - min);
+      const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
+      const selectedTier = () => tiers[Number($("tier").value)] || tiers[1];
+
+      function beep(frequency, duration = .1, type = "sine", volume = .045) {
+        if (!soundEnabled) return;
+        try {
+          audioContext ||= new (window.AudioContext || window.webkitAudioContext)();
+          if (audioContext.state === "suspended") void audioContext.resume();
+          const oscillator = audioContext.createOscillator();
+          const gain = audioContext.createGain();
+          oscillator.type = type;
+          oscillator.frequency.setValueAtTime(frequency, audioContext.currentTime);
+          gain.gain.setValueAtTime(volume, audioContext.currentTime);
+          gain.gain.exponentialRampToValueAtTime(.001, audioContext.currentTime + duration);
+          oscillator.connect(gain).connect(audioContext.destination);
+          oscillator.start();
+          oscillator.stop(audioContext.currentTime + duration);
+        } catch (error) {
+          console.error("Web Audio could not play the game sound.", error);
+        }
+      }
+
+      function addLog(message) {
+        game.logs.unshift(message);
+        game.logs.length = Math.min(game.logs.length, 6);
+        $("log").innerHTML = game.logs.map((line) => `<div>${line}</div>`).join("");
+      }
+
+      function announce(message, tone = "normal") {
+        $("status").textContent = message;
+        game.effects.push({ text: message.toUpperCase(), x: 480 + rand(-30, 30), y: 244, life: 1.5, color: tone === "good" ? "#91f0a1" : tone === "bad" ? "#ff7185" : "#f5d574" });
+        addLog(message);
+      }
+
+      function updateHud() {
+        const setBar = (id, value) => { $(id).style.width = `${clamp(value, 0, 100)}%`; };
+        setBar("playerStamina", game.playerStamina);
+        setBar("aiStamina", game.aiStamina);
+        setBar("playerPosture", game.playerPosture);
+        setBar("aiPosture", game.aiPosture);
+        setBar("playerThreat", game.playerThreat);
+        setBar("aiThreat", game.aiThreat);
+        $("playerPoints").textContent = game.playerPoints;
+        $("aiPoints").textContent = game.aiPoints;
+        $("playerState").textContent = positions[game.playerPosition];
+        $("aiState").textContent = positions[game.aiPosition];
+        const pressure = game.aiPosition === 4 || game.aiPosition === 5;
+        $("pressureBadge").hidden = !pressure;
+        $("pressureBadge").textContent = pressure ? `UNDER ${positions[game.aiPosition].toUpperCase()} PRESSURE` : "";
+        const minutes = Math.floor(game.time / 60).toString().padStart(2, "0");
+        const seconds = Math.floor(game.time % 60).toString().padStart(2, "0");
+        $("clock").textContent = `${minutes}:${seconds}`;
+        $("needle").style.left = `calc(${game.needle * 100}% - 2px)`;
+        $("meterCaption").textContent = game.challenge
+          ? `${game.challenge.type === "submission" ? "Submission lock" : "Position transition"} active · press SPACE in the green zone.`
+          : "Green = perfect · yellow = scramble · red = reversal. Start an action to activate the gauge.";
+        updateMatrix();
+      }
+
+      function updateMatrix() {
+        if (renderedMatrixChoice === game.matrixChoice) return;
+        const values = [0.12, 0.19, 0.27, 0.21, 0.13, 0.08];
+        const labels = ["Advance", "Guard", "Pass", "Sweep", "Submit", "Recover"];
+        $("matrix").innerHTML = values.map((value, i) => `<span class="${game.matrixChoice === i ? "active" : ""}">${labels[i]}<br>${(value * 100).toFixed(0)}%</span>`).join("");
+        renderedMatrixChoice = game.matrixChoice;
+      }
+
+      function startChallenge(type, target) {
+        if (!game.running || game.challenge) return;
+        const cost = type === "submission" ? 6 : type === "sweep" ? 7 : 9;
+        if (game.playerStamina < cost) {
+          announce("Too exhausted — use E to recover stamina.", "bad");
+          beep(150, .15, "square");
+          return;
+        }
+        game.playerStamina -= cost;
+        game.challenge = { type, target, time: 0, duration: type === "submission" ? 2.5 : 2.1, start: game.needle };
+        announce(type === "submission" ? `Submission attempt: ${target}. Hit SPACE in green!` : `Working toward ${positions[target]} — hit SPACE in green!`);
+        beep(500, .08, "triangle");
+      }
+
+      function finishChallenge(success) {
+        const challenge = game.challenge;
+        if (!challenge) return;
+        game.challenge = null;
+        if (success) {
+          if (challenge.type === "submission") {
+            game.playerThreat = clamp(game.playerThreat + 42, 0, 100);
+            game.aiPosture = clamp(game.aiPosture - 10, 0, 100);
+            game.aiStamina = clamp(game.aiStamina - 12, 0, 100);
+            announce("Submission locked! +42 threat — keep the pressure!", "good");
+            game.shake = .16;
+            beep(740, .16, "sawtooth");
+            if (game.playerThreat >= 100) finishMatch("SUBMISSION VICTORY", "You secured the tap. Coach Simba approves! 🐾");
+          } else if (challenge.type === "sweep") {
+            game.playerPosition = challenge.target;
+            game.playerPoints += 2;
+            game.aiPosition = Math.max(0, game.aiPosition - 1);
+            announce(`Sweep! You reversed the position for +2 points!`, "good");
+            game.shake = .16;
+            beep(690, .14, "triangle");
+          } else {
+            const oldPosition = game.playerPosition;
+            game.playerPosition = challenge.target;
+            game.playerPoints += Math.max(0, positionPoints[positions[challenge.target]] - positionPoints[positions[oldPosition]]);
+            game.playerPosture = clamp(game.playerPosture + 4, 0, 100);
+            announce(challenge.target === 4 ? "Guard passed! +3 points!" : challenge.target >= 5 ? `Position secured: ${positions[challenge.target]}!` : `Transition complete: ${positions[challenge.target]}.`, "good");
+            game.shake = .12;
+            beep(620, .12, "triangle");
+          }
+          game.flash = .16;
+          return;
+        }
+
+        if (challenge.type === "submission") {
+          game.playerStamina = clamp(game.playerStamina - 10, 0, 100);
+          game.playerPosture = clamp(game.playerPosture - 8, 0, 100);
+          game.playerThreat = clamp(game.playerThreat - 8, 0, 100);
+          game.aiPosition = Math.max(0, game.aiPosition - 1);
+          announce("Submission escaped! Extra penalty: -10 stamina, -8 posture.", "bad");
+          addLog("Missed submission penalty applied: 10 stamina and 8 posture.");
+        } else {
+          game.playerStamina = clamp(game.playerStamina - 8, 0, 100);
+          game.playerPosture = clamp(game.playerPosture - 12, 0, 100);
+          game.playerPosition = Math.max(0, game.playerPosition - 1);
+          announce("Transition reversed — reset your base and try again.", "bad");
+        }
+        game.shake = .2;
+        game.flash = .25;
+        beep(135, .23, "square");
+      }
+
+      function hitTiming() {
+        if (!game.running) return;
+        if (!game.challenge) {
+          if (game.playerPosition >= 4) startChallenge("submission", ["Rear Naked Choke", "Armbar", "Triangle Choke", "Kimura"][Math.floor(Math.random() * 4)]);
+          else announce("Advance to side control, mount, or back control before submitting.");
+          return;
+        }
+        const distance = Math.abs(game.needle - .5);
+        if (distance <= .075) {
+          finishChallenge(true);
+        } else if (distance <= .19) {
+          const challenge = game.challenge;
+          game.challenge = null;
+          if (challenge.type === "submission") {
+            game.playerThreat = clamp(game.playerThreat + 16, 0, 100);
+            game.playerStamina = clamp(game.playerStamina - 5, 0, 100);
+            announce("Scramble! Partial submission pressure — re-engage.", "normal");
+          } else {
+            game.playerPosition = challenge.target;
+            game.playerStamina = clamp(game.playerStamina - 5, 0, 100);
+            announce("Scramble transition! You gained the position at a stamina cost.");
+          }
+          beep(390, .1, "triangle");
+        } else {
+          finishChallenge(false);
+        }
+      }
+
+      function advancePosition() {
+        if (!game.running || game.challenge) return;
+        if (game.playerPosition >= positions.length - 1) {
+          announce("You are in back control — SPACE starts a submission attempt.");
+          return;
+        }
+        const next = game.playerPosition + 1;
+        if (next === 1 && game.playerStamina < 10) {
+          announce("Recover stamina before forcing the clinch.", "bad");
+          return;
+        }
+        game.matrixChoice = game.playerPosition < 3 ? 0 : 2;
+        startChallenge("position", next);
+      }
+
+      function defend() {
+        if (!game.running) return;
+        if (game.aiThreat > 0) {
+          game.aiThreat = clamp(game.aiThreat - 27, 0, 100);
+          game.playerStamina = clamp(game.playerStamina - 5, 0, 100);
+          announce("Frames up! AI submission pressure reduced.");
+          if (game.aiPosition > 0) game.aiPosition = Math.max(0, game.aiPosition - 1);
+        } else if (game.playerPosition >= 1 && game.playerPosition <= 3 && game.aiPosition >= 2) {
+          const target = Math.min(4, game.playerPosition + 1);
+          game.matrixChoice = 3;
+          startChallenge("sweep", target);
+        } else if (game.playerPosition > 0) {
+          game.playerPosition = Math.max(0, game.playerPosition - 1);
+          game.playerPosture = clamp(game.playerPosture + 5, 0, 100);
+          announce(`You pulled back to ${positions[game.playerPosition]} and reset your base.`);
+        } else {
+          announce("You establish defensive frames and conserve your position.");
+          game.playerStamina = clamp(game.playerStamina + 2, 0, 100);
+        }
+        beep(260, .07, "sine");
+      }
+
+      function flowBreath() {
+        if (!game.running) return;
+        if (game.elapsed - game.lastBreath < 4) {
+          announce("Flow breath is settling — wait a moment before the next one.");
+          return;
+        }
+        game.lastBreath = game.elapsed;
+        const center = Math.abs(game.needle - .5) < .13;
+        const underPressure = game.aiPosition === 4 || game.aiPosition === 5;
+        const gain = 24 + (underPressure ? 14 : 0);
+        game.playerStamina = clamp(game.playerStamina + gain, 0, 100);
+        game.playerPosture = clamp(game.playerPosture + (center ? 8 : 3) + (underPressure ? 4 : 0), 0, 100);
+        if (center && game.aiThreat) game.aiThreat = clamp(game.aiThreat - 8, 0, 100);
+        const pressureNote = underPressure ? " (+14 under Side Control/Mount pressure)" : "";
+        announce(`${center ? "Perfect flow breath" : "Flow breath"}: +${gain} stamina${center ? `, +${8 + (underPressure ? 4 : 0)} posture` : ""}${pressureNote}.`, center ? "good" : "normal");
+        beep(center ? 580 : 320, .15, "sine");
+      }
+
+      function balance(direction) {
+        if (!game.running) return;
+        game.balance = clamp(game.balance + direction, -1, 1);
+        if (game.aiThreat > 0) {
+          game.aiThreat = clamp(game.aiThreat - 4, 0, 100);
+          game.playerStamina = clamp(game.playerStamina - 1, 0, 100);
+        } else {
+          game.playerPosture = clamp(game.playerPosture + 1.2, 0, 100);
+        }
+      }
+
+      function aiTurn() {
+        if (!game.running || game.challenge) return;
+        const tier = selectedTier();
+        const roll = Math.random();
+        if (game.aiPosition >= 4 && game.aiStamina > 14 && roll < tier.attack) {
+          game.aiStamina -= 10;
+          game.aiThreat = clamp(game.aiThreat + (tier.name.startsWith("Grandmaster") ? 27 : 21), 0, 100);
+          game.playerPosture = clamp(game.playerPosture - 7, 0, 100);
+          announce(`AI attacks from ${positions[game.aiPosition]} — defend with S!`, "bad");
+          beep(190, .12, "sawtooth");
+          if (game.aiThreat >= 100) finishMatch("AI SUBMISSION", "The opponent completed the submission. Reset and try another roll.");
+          return;
+        }
+        if (game.aiPosition < 5 && roll < .55) {
+          const old = game.aiPosition;
+          game.aiPosition = Math.min(game.aiPosition + 1, positions.length - 1);
+          game.aiPoints += Math.max(0, positionPoints[positions[game.aiPosition]] - positionPoints[positions[old]]);
+          game.playerStamina = clamp(game.playerStamina - 3, 0, 100);
+          game.matrixChoice = 2;
+          announce(`AI advances to ${positions[game.aiPosition]} — use S to frame or escape.`, "bad");
+          game.shake = .08;
+        } else {
+          game.aiStamina = clamp(game.aiStamina + 3, 0, 100);
+          game.matrixChoice = 5;
+          if (Math.random() < .35) announce("AI resets its base and recovers.");
+        }
+      }
+
+      function finishMatch(title, copy) {
+        game.running = false;
+        game.over = true;
+        $("overlayTitle").textContent = title;
+        $("overlayCopy").textContent = `${copy} Final score: ${game.playerPoints}–${game.aiPoints}.`;
+        $("start").textContent = "Roll again";
+        $("overlay").hidden = false;
+        beep(title.includes("VICTORY") ? 820 : 120, .45, "triangle", .065);
+      }
+
+      function startMatch() {
+        Object.assign(game, {
+          running: true, over: false, time: 300, elapsed: 0, last: performance.now(), aiTimer: 0,
+          playerPosition: 0, aiPosition: 0, playerStamina: 100, aiStamina: 100,
+          playerPosture: 100, aiPosture: 100, playerThreat: 0, aiThreat: 0,
+          playerPoints: 0, aiPoints: 0, challenge: null, needle: Math.random() * .35,
+          direction: 1, balance: 0, effects: [], logs: [], shake: 0, flash: 0,
+          matrixChoice: 0, lastBreath: -20
+        });
+        game.gi = $("gi").value;
+        $("overlay").hidden = true;
+        $("log").innerHTML = "";
+        announce(`Match on! ${selectedTier().name} enters the mat.`);
+        beep(440, .12);
+        updateHud();
+      }
+
+      function roundedRect(x, y, w, h, r, color) {
+        ctx.fillStyle = color;
+        ctx.beginPath();
+        ctx.roundRect(x, y, w, h, r);
+        ctx.fill();
+      }
+
+      function drawDojo(time) {
+        const gradient = ctx.createLinearGradient(0, 0, 0, 540);
+        gradient.addColorStop(0, "#102738");
+        gradient.addColorStop(.55, "#0b1c28");
+        gradient.addColorStop(1, "#071119");
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, 960, 540);
+        for (let i = 0; i < 13; i++) {
+          const x = 25 + i * 76;
+          ctx.fillStyle = i % 2 ? "#1b3341" : "#172e3b";
+          ctx.beginPath();
+          ctx.ellipse(x, 114 + Math.sin(time * 1.5 + i) * 2, 15, 20, 0, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.fillRect(x - 23, 130, 46, 31);
+        }
+        ctx.strokeStyle = "#83c7ce";
+        ctx.globalAlpha = .45;
+        ctx.lineWidth = 3;
+        ctx.strokeRect(93, 179, 774, 286);
+        ctx.globalAlpha = 1;
+        for (let i = 0; i < 9; i++) {
+          ctx.strokeStyle = i % 2 ? "#1c6070" : "#174b5c";
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(106, 207 + i * 28);
+          ctx.lineTo(854, 207 + i * 28);
+          ctx.stroke();
+        }
+        ctx.strokeStyle = "rgba(124,231,223,.3)";
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.ellipse(480, 351, 150, 78, 0, 0, Math.PI * 2);
+        ctx.stroke();
+        ctx.fillStyle = "#f4d36a";
+        ctx.font = "700 13px Segoe UI";
+        ctx.textAlign = "center";
+        ctx.fillText("Q U A N T I X   D O J O", 480, 194);
+        drawSimba(time);
+      }
+
+      function drawSimba(time) {
+        const x = 828, y = 154 + Math.sin(time * 2) * 2;
+        ctx.fillStyle = "#0b151d";
+        ctx.fillRect(774, 146, 108, 16);
+        ctx.fillStyle = "#d98243";
+        ctx.beginPath();
+        ctx.ellipse(x, y + 10, 20, 16, 0, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(x, y - 5, 14, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.moveTo(x - 13, y - 12); ctx.lineTo(x - 10, y - 26); ctx.lineTo(x - 2, y - 16);
+        ctx.moveTo(x + 13, y - 12); ctx.lineTo(x + 10, y - 26); ctx.lineTo(x + 2, y - 16);
+        ctx.fill();
+        ctx.fillStyle = "#14212a";
+        ctx.beginPath(); ctx.arc(x - 5, y - 6, 1.7, 0, 7); ctx.arc(x + 5, y - 6, 1.7, 0, 7); ctx.fill();
+        ctx.fillStyle = "#f6d889";
+        ctx.font = "11px Segoe UI";
+        ctx.textAlign = "center";
+        ctx.fillText("COACH SIMBA 🐾", x, 139);
+      }
+
+      function drawFighter(x, y, color, isAI, pose, time) {
+        const forward = isAI ? -1 : 1;
+        const sway = Math.sin(time * 4 + (isAI ? 2 : 0)) * 4;
+        ctx.save();
+        ctx.translate(x, y + sway);
+        ctx.strokeStyle = "#d6c6a9";
+        ctx.lineWidth = 17;
+        ctx.lineCap = "round";
+        const grounded = pose >= 2;
+        if (!grounded) {
+          ctx.beginPath();
+          ctx.moveTo(-7, 30); ctx.lineTo(-18, 68); ctx.lineTo(-32 + forward * 5, 78);
+          ctx.moveTo(8, 30); ctx.lineTo(16, 62); ctx.lineTo(32 + forward * 5, 75);
+          ctx.stroke();
+        } else {
+          ctx.beginPath();
+          ctx.moveTo(-8, 28); ctx.lineTo(-30, 48); ctx.lineTo(-42, 43);
+          ctx.moveTo(9, 28); ctx.lineTo(31, 48); ctx.lineTo(43, 42);
+          ctx.stroke();
+        }
+        ctx.fillStyle = color;
+        ctx.beginPath();
+        ctx.ellipse(0, 8, 25, 34, grounded ? .45 : 0, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.strokeStyle = "rgba(255,255,255,.55)";
+        ctx.lineWidth = 2;
+        ctx.beginPath(); ctx.moveTo(-3, -18); ctx.lineTo(0, 31); ctx.moveTo(-19, 1); ctx.lineTo(18, 13); ctx.stroke();
+        ctx.fillStyle = "#d7a47f";
+        ctx.beginPath(); ctx.arc(0, -31, 17, 0, Math.PI * 2); ctx.fill();
+        ctx.fillStyle = "#242029";
+        ctx.beginPath(); ctx.arc(0, -36, 17, Math.PI, Math.PI * 2); ctx.fill();
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 12;
+        ctx.beginPath();
+        const armY = pose >= 4 ? 1 : -2;
+        ctx.moveTo(-17, -4 + armY); ctx.lineTo(forward * 23, 4);
+        ctx.moveTo(18, -4 + armY); ctx.lineTo(-forward * 23, 10);
+        ctx.stroke();
+        ctx.restore();
+      }
+
+      function draw(time) {
+        ctx.save();
+        if (game.shake > 0) {
+          ctx.translate(rand(-game.shake * 28, game.shake * 28), rand(-game.shake * 18, game.shake * 18));
+          game.shake = Math.max(0, game.shake - .018);
+        }
+        drawDojo(time);
+        const close = game.playerPosition >= 1 || game.aiPosition >= 1;
+        const px = close ? 435 : 385;
+        const ax = close ? 520 : 575;
+        drawFighter(px, 350, game.gi, false, game.playerPosition, time);
+        drawFighter(ax, 345, "#a94e78", true, game.aiPosition, time);
+        ctx.fillStyle = "rgba(4,14,21,.74)";
+        roundedRect(28, 22, 234, 56, 9, "rgba(4,14,21,.74)");
+        ctx.fillStyle = "#7ce7df";
+        ctx.font = "700 12px Segoe UI";
+        ctx.textAlign = "left";
+        ctx.fillText(`YOUR POSITION  ·  ${positions[game.playerPosition].toUpperCase()}`, 42, 45);
+        ctx.fillStyle = "#f5d574";
+        ctx.fillText(`AI READ  ·  ${positions[game.aiPosition].toUpperCase()}`, 42, 65);
+        game.effects = game.effects.filter((effect) => effect.life > 0);
+        game.effects.forEach((effect) => {
+          effect.life -= .018;
+          effect.y -= .35;
+          ctx.globalAlpha = clamp(effect.life, 0, 1);
+          ctx.fillStyle = effect.color;
+          ctx.font = "900 20px Segoe UI";
+          ctx.textAlign = "center";
+          ctx.shadowColor = effect.color;
+          ctx.shadowBlur = 12;
+          ctx.fillText(effect.text, effect.x, effect.y);
+          ctx.shadowBlur = 0;
+        });
+        ctx.globalAlpha = 1;
+        if (game.flash > 0) {
+          ctx.fillStyle = `rgba(255,255,255,${game.flash})`;
+          ctx.fillRect(0, 0, 960, 540);
+          game.flash = Math.max(0, game.flash - .025);
+        }
+        ctx.restore();
+      }
+
+      function tick(now) {
+        const delta = Math.min((now - game.last) / 1000 || 0, .05);
+        game.last = now;
+        if (game.running) {
+          game.elapsed += delta;
+          game.time = Math.max(0, game.time - delta);
+          game.needle += game.direction * delta * (game.challenge?.type === "submission" ? 1.08 : .82);
+          if (game.needle >= 1) { game.needle = 1; game.direction = -1; }
+          if (game.needle <= 0) { game.needle = 0; game.direction = 1; }
+          game.aiTimer += delta;
+          if (game.challenge) {
+            game.challenge.time += delta;
+            if (game.challenge.time >= game.challenge.duration) finishChallenge(false);
+          }
+          if (game.aiTimer >= selectedTier().response) {
+            game.aiTimer = 0;
+            aiTurn();
+          }
+          if (game.time <= 0) finishMatch(game.playerPoints > game.aiPoints ? "POINTS VICTORY" : game.playerPoints < game.aiPoints ? "AI WINS ON POINTS" : "DRAW", "The five-minute round is over.");
+          if (game.playerPosture <= 0) finishMatch("POSTURE BROKEN", "The opponent passed your guard and won by control.");
+          if (game.aiPosture <= 0 && game.playerPosition >= 4) {
+            game.aiPosture = 1;
+            game.aiPosition = Math.max(0, game.aiPosition - 1);
+            announce("AI posture broken — scramble to secure control!", "good");
+          }
+          if (game.elapsed % 1 < delta) {
+            game.playerStamina = clamp(game.playerStamina + .22, 0, 100);
+            game.aiStamina = clamp(game.aiStamina + .18 * selectedTier().stamina, 0, 100);
+          }
+          updateHud();
+        }
+        draw(now / 1000);
+        requestAnimationFrame(tick);
+      }
+
+      $("start").addEventListener("click", startMatch);
+      $("gi").addEventListener("change", () => { game.gi = $("gi").value; });
+      $("sound").addEventListener("click", () => {
+        soundEnabled = !soundEnabled;
+        $("sound").textContent = soundEnabled ? "🔊 Sound" : "🔇 Muted";
+        $("sound").setAttribute("aria-pressed", String(soundEnabled));
+        if (soundEnabled) beep(500, .08);
+      });
+      document.querySelectorAll("[data-action]").forEach((button) => {
+        button.addEventListener("click", () => {
+          const action = button.dataset.action;
+          if (action === "advance") advancePosition();
+          if (action === "defend") defend();
+          if (action === "timing") hitTiming();
+          if (action === "breath") flowBreath();
+          if (action === "balance") balance(Math.random() < .5 ? -1 : 1);
+        });
+      });
+      document.addEventListener("keydown", (event) => {
+        if (event.repeat || event.target instanceof HTMLInputElement || event.target instanceof HTMLSelectElement) return;
+        const key = event.key.toLowerCase();
+        if (key === " " || key === "arrowup") { event.preventDefault(); hitTiming(); }
+        else if (key === "w" || key === "arrowright") advancePosition();
+        else if (key === "s" || key === "arrowleft") defend();
+        else if (key === "e") flowBreath();
+        else if (key === "a") balance(-1);
+        else if (key === "d") balance(1);
+      });
+
+      game.last = performance.now();
+      addLog("Choose a gi, select a difficulty, and start your roll.");
+      updateHud();
+      requestAnimationFrame(tick);
+    })();
+  </script>
+</body>
+</html>

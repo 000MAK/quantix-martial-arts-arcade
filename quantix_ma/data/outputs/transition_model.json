@@ -1,0 +1,224 @@
+{
+  "states": [
+    "standing_clinch",
+    "guard",
+    "open_guard",
+    "half_guard",
+    "side_control",
+    "mount",
+    "back_control",
+    "submission_lock",
+    "reset"
+  ],
+  "matrix": {
+    "standing_clinch": {
+      "standing_clinch": 0.0,
+      "guard": 0.7159090909090909,
+      "open_guard": 0.2159090909090909,
+      "half_guard": 0.011363636363636364,
+      "side_control": 0.011363636363636364,
+      "mount": 0.011363636363636364,
+      "back_control": 0.011363636363636364,
+      "submission_lock": 0.011363636363636364,
+      "reset": 0.011363636363636364
+    },
+    "guard": {
+      "standing_clinch": 0.005319148936170213,
+      "guard": 0.0,
+      "open_guard": 0.10638297872340426,
+      "half_guard": 0.23404255319148937,
+      "side_control": 0.14893617021276595,
+      "mount": 0.10106382978723404,
+      "back_control": 0.09574468085106383,
+      "submission_lock": 0.07446808510638298,
+      "reset": 0.23404255319148937
+    },
+    "open_guard": {
+      "standing_clinch": 0.022222222222222223,
+      "guard": 0.4222222222222222,
+      "open_guard": 0.0,
+      "half_guard": 0.022222222222222223,
+      "side_control": 0.4444444444444444,
+      "mount": 0.022222222222222223,
+      "back_control": 0.022222222222222223,
+      "submission_lock": 0.022222222222222223,
+      "reset": 0.022222222222222223
+    },
+    "half_guard": {
+      "standing_clinch": 0.0196078431372549,
+      "guard": 0.5490196078431373,
+      "open_guard": 0.0196078431372549,
+      "half_guard": 0.0,
+      "side_control": 0.3333333333333333,
+      "mount": 0.0196078431372549,
+      "back_control": 0.0196078431372549,
+      "submission_lock": 0.0196078431372549,
+      "reset": 0.0196078431372549
+    },
+    "side_control": {
+      "standing_clinch": 0.014285714285714285,
+      "guard": 0.014285714285714285,
+      "open_guard": 0.014285714285714285,
+      "half_guard": 0.014285714285714285,
+      "side_control": 0.0,
+      "mount": 0.5142857142857142,
+      "back_control": 0.4,
+      "submission_lock": 0.014285714285714285,
+      "reset": 0.014285714285714285
+    },
+    "mount": {
+      "standing_clinch": 0.01639344262295082,
+      "guard": 0.01639344262295082,
+      "open_guard": 0.01639344262295082,
+      "half_guard": 0.01639344262295082,
+      "side_control": 0.01639344262295082,
+      "mount": 0.0,
+      "back_control": 0.5737704918032787,
+      "submission_lock": 0.01639344262295082,
+      "reset": 0.32786885245901637
+    },
+    "back_control": {
+      "standing_clinch": 0.01020408163265306,
+      "guard": 0.01020408163265306,
+      "open_guard": 0.01020408163265306,
+      "half_guard": 0.01020408163265306,
+      "side_control": 0.01020408163265306,
+      "mount": 0.01020408163265306,
+      "back_control": 0.0,
+      "submission_lock": 0.5,
+      "reset": 0.4387755102040816
+    },
+    "submission_lock": {
+      "standing_clinch": 0.025,
+      "guard": 0.025,
+      "open_guard": 0.025,
+      "half_guard": 0.025,
+      "side_control": 0.025,
+      "mount": 0.025,
+      "back_control": 0.325,
+      "submission_lock": 0.0,
+      "reset": 0.525
+    },
+    "reset": {
+      "standing_clinch": 0.012345679012345678,
+      "guard": 0.9135802469135802,
+      "open_guard": 0.012345679012345678,
+      "half_guard": 0.012345679012345678,
+      "side_control": 0.012345679012345678,
+      "mount": 0.012345679012345678,
+      "back_control": 0.012345679012345678,
+      "submission_lock": 0.012345679012345678,
+      "reset": 0.0
+    }
+  },
+  "dwell_unit": "seconds",
+  "dwell_times": {
+    "standing_clinch": {
+      "visits": 80,
+      "mean": 30.863,
+      "max": 180.8
+    },
+    "guard": {
+      "visits": 180,
+      "mean": 33.271,
+      "max": 192.3
+    },
+    "open_guard": {
+      "visits": 37,
+      "mean": 17.943,
+      "max": 121.1
+    },
+    "half_guard": {
+      "visits": 43,
+      "mean": 23.886,
+      "max": 110.2
+    },
+    "side_control": {
+      "visits": 62,
+      "mean": 16.94,
+      "max": 98.0
+    },
+    "mount": {
+      "visits": 53,
+      "mean": 12.721,
+      "max": 61.1
+    },
+    "back_control": {
+      "visits": 90,
+      "mean": 18.568,
+      "max": 84.4
+    },
+    "submission_lock": {
+      "visits": 61,
+      "mean": 8.234,
+      "max": 52.5
+    },
+    "reset": {
+      "visits": 124,
+      "mean": 5.213,
+      "max": 45.4
+    }
+  },
+  "best_transitions": [
+    {
+      "from": "reset",
+      "to": "guard",
+      "probability": 0.9136
+    },
+    {
+      "from": "standing_clinch",
+      "to": "guard",
+      "probability": 0.7159
+    },
+    {
+      "from": "mount",
+      "to": "back_control",
+      "probability": 0.5738
+    },
+    {
+      "from": "half_guard",
+      "to": "guard",
+      "probability": 0.549
+    },
+    {
+      "from": "submission_lock",
+      "to": "reset",
+      "probability": 0.525
+    },
+    {
+      "from": "side_control",
+      "to": "mount",
+      "probability": 0.5143
+    },
+    {
+      "from": "back_control",
+      "to": "submission_lock",
+      "probability": 0.5
+    },
+    {
+      "from": "open_guard",
+      "to": "side_control",
+      "probability": 0.4444
+    },
+    {
+      "from": "back_control",
+      "to": "reset",
+      "probability": 0.4388
+    },
+    {
+      "from": "open_guard",
+      "to": "guard",
+      "probability": 0.4222
+    },
+    {
+      "from": "side_control",
+      "to": "back_control",
+      "probability": 0.4
+    },
+    {
+      "from": "half_guard",
+      "to": "side_control",
+      "probability": 0.3333
+    }
+  ]
+}
